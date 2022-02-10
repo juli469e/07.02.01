@@ -1,0 +1,129 @@
+* {
+  box-sizing: border-box;
+}
+
+body {
+  font-family: "Trebuchet MS", "Lucida Sans Unicode", "Lucida Grande",
+    "Lucida Sans", Arial, sans-serif;
+  margin: 30px;
+  background-color: rgb(190, 217, 224);
+  color: rgb(0, 0, 0);
+}
+body p {
+  color: white;
+}
+
+body h2 {
+  color: white;
+}
+
+#splash {
+  display: flex;
+  justify-content: center;
+}
+
+#splash img {
+  width: 60%;
+  object-fit: contain;
+  aspect-ratio: 16/9;
+}
+
+button {
+  font-family: "Trebuchet MS", "Lucida Sans Unicode", "Lucida Grande",
+    "Lucida Sans", Arial, sans-serif;
+  width: 100%;
+  min-width: 100px;
+  max-width: 200px;
+  padding: 10px;
+  border-color: palevioletred;
+  background-color: rgb(180, 224, 180);
+  border-radius: 10px;
+}
+
+.valgt {
+  color: white;
+  background-color: rgb(173, 231, 246);
+}
+
+h1 {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+}
+
+nav {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+img {
+  width: 100%;
+  object-fit: cover;
+  aspect-ratio: 1/1;
+}
+
+.stor {
+  width: 100%;
+  aspect-ratio: 16/9;
+  object-fit: cover;
+}
+
+.container {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: 15px;
+}
+
+.article {
+  border-style: solid;
+  border-color: rgb(251, 130, 201);
+  border-radius: 7px;
+  background-color: rgb(251, 130, 201);
+}
+
+.article-single {
+  max-width: 1000px;
+  margin: 0 auto;
+}
+
+nav {
+  display: flex;
+  justify-content: center;
+  gap: 30px;
+  padding-top: 15px;
+}
+
+h1 {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  padding-bottom: 15px;
+  font-size: 3.5rem;
+}
+
+#modal {
+  display: none;
+  width: 100vw;
+  height: 100vh;
+  position: fixed;
+  background-color: #fff2f255;
+}
+
+#modal article {
+  max-width: 300px;
+  margin: 2rem auto;
+  background-color: whitesmoke;
+}
+
+.logo {
+  height: 50%;
+  display: flex;
+  justify-content: center;
+}
+.logo img {
+  width: 50%;
+  object-fit: contain;
+  aspect-ratio: 16/9;
+}

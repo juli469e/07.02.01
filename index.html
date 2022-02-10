@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>BISTRO BABUSHKA</title>
+    <style>
+
+        img {
+            width: 100%;
+            object-fit: cover;
+            aspect-ratio: 1/1;
+        }
+
+.container {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px,1fr));
+    gap: 15px;
+}
+
+.article {
+    border-style: solid;
+    border-color: orange;
+}
+    nav {
+        display: flex;
+        justify-content: center;
+        gap: 10px;
+        padding-top: 15px;
+    }
+
+    .valgt {
+        color: white;
+        background-color: tomato;
+    }
+
+    h1 {
+       display: flex;
+        justify-content: center;
+        gap: 10px;
+        padding-bottom: 15px; 
+    }
+
+
+    </style>
+  </head>
+  <body> 
+      <main>
+      <nav>
+                <button data-kategori="alle" class="valgt">Alle</button>
+                <button data-kategori="forretter">Forretter</button>
+                <button data-kategori="hovedretter">Hovedretter</button>
+                <button data-kategori="desserter">Desserter</button>
+                <button data-kategori="sideorders">Side orders</button>
+                <button data-kategori="drikkevarer">Drinks</button>
+
+            </nav>
+            <h1>Alle</h1>
+</head>
+  <body>
+   
+      <section class="container""></section>
+      <template>
+        <article class="article">
+          <img src="" alt="" class="billede" />
+          <h2 class="navn"></h2>
+          <p class="kortbeskrivelse"></p>
+          <p class="pris"></p>
+  
+        </article>
+      </template>
+    </main>
+    <script>
+       const url = "https://babushka-dd8a.restdb.io/rest/menu";
+        const options = {
+            headers: {
+                "x-apikey": "600ec2fb1346a1524ff12de4",
+            },
+        }; 
+
+
+        const h1 = document.querySelector("h1")
+        document.addEventListener("DOMContentLoaded", start)
+        let menu;
+        let filter = "alle";
+
+        //første funktion der kaldes efter DOM er loaded
+        function start() {
+            const filterKnapper = document.querySelectorAll("nav button");
+            filterKnapper.forEach(knap => knap.addEventListener("click", filtrerPersoner));
+            hentData();
+        }
+
+        //eventlistener knyttet til knapperne der vælger hvilket filter, der er aktivt
+        function filtrerPersoner(){
+            filter = this.dataset.kategori; //sæt variabel "filter" til værdien af data-kategori på den knap der er klikket på
+            document.querySelector(".valgt").classList.remove("valgt"); //fjern .valgt fra knap
+            this.classList.add("valgt") //marker den knap der er klikket på
+            visRetter(); //kald funktionen visPersoner efter
+            h1.textContent = this.textContent;
+            console.log(this);
+        }
+
+         async function hentData() {
+            const respons = await fetch(url, options);
+            menu = await respons.json();
+            console.log("Personer", menu)
+            visRetter();
+        }
+
+        function visRetter() {
+            console.log(menu);
+            const template = document.querySelector("template");
+            const container = document.querySelector(".container")
+            container.textContent = "";  
+            
+            menu.forEach((ret) => {
+                if (filter == ret.kategori || filter == "alle") {
+                console.log("Kategori", ret.kategori);
+
+                const klon = template.cloneNode(true).content;
+                klon.querySelector(".billede").src = `billeder/${ret.billednavn}-md.jpg`;
+
+                klon.querySelector(".navn").textContent = ret.navn;
+                klon.querySelector(".kortbeskrivelse").textContent = ret.kortbeskrivelse;
+                klon.querySelector(".pris").textContent = `Pris: ${ret.pris} kr`
+                container.appendChild(klon);
+            
+                 
+                }
+            });
+        }
+        
+        
+    
+        hentData();
+        
+
+                // const klon = template.cloneNode(true).content;
+                // klon.querySelector(".profilbillede").src = "billeder/" + person.profilbillede;
+            
+                
+                // klon.querySelector(".efternavn").textContent = person.efternavn;
+                // klon.querySelector(".email").textContent = person.email;
+                // container.appendChild(klon);  
+    //         }
+          
+    //     });
+    //   }
+
+     
+    </script>
+  </body>
+</html>
